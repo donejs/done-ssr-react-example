@@ -4,5 +4,13 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+let root;
+if(window.doneSsrAttach) {
+  root = document.createElement('div');
+  root.id = 'root';
+  window.doneSsrAttach(root);
+} else {
+  root = document.getElementById('root');
+}
+
+ReactDOM.render(<App />, root);
