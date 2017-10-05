@@ -1,7 +1,7 @@
 const Readable = require('stream').Readable;
 
 module.exports = function(app){
-  app.get('/api/perks', (request, response) => {
+  app.get('/api/items', (request, response) => {
     response.writeHead(200, { 'Content-Type': 'text/plain' })
 
     var chunks = [

@@ -16,18 +16,17 @@ const app = express();
 const requests = require("done-ssr/zones/requests");
 const dom = require("done-ssr/zones/can-simple-dom");
 const pushFetch = require("done-ssr/zones/push-fetch");
-const pushImages = require("done-ssr/zones/push-images");
 const pushMutations = require("done-ssr/zones/push-mutations");
 
 function render() {
   const styles = document.createElement("link");
   styles.setAttribute("rel", "stylesheet");
-  styles.setAttribute("href", "/build/static/css/main.c17080f1.css");
+  styles.setAttribute("href", "/static/css/main.c17080f1.css");
   document.head.appendChild(styles);
   document.body.innerHTML = `
     <div id="one"></div>
     <div id="root"></div>
-    <script src="/build/static/js/main.cc351d6c.js"></script>
+    <script src="/static/js/main.cc351d6c.js"></script>
   `;
 
   ReactDOM.render(React.createElement(App), document.getElementById('root'));
@@ -35,11 +34,12 @@ function render() {
 
 const PORT = process.env.PORT || 8080;
 
+app.use(express.static('build'));
 app.use(express.static('.'));
 
 require('./api')(app);
 
-app.get('/', (request, response) => {
+app.get('/', async (request, response) => {
 	var zone = new Zone([
 		// Overrides XHR, fetch
 		requests(request),
@@ -57,10 +57,11 @@ app.get('/', (request, response) => {
   // Send the initial HTML
   response.write(zone.data.html);
 
-  runPromise.then(() => response.end());
+  await runPromise;
+  response.end();
 });
 
-require('spdy').createServer({
+require('donejs-spdy').createServer({
 	key: fs.readFileSync(process.env.KEY),
 	cert: fs.readFileSync(process.env.CERT),
 	spdy: {

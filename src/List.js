@@ -6,7 +6,7 @@ export default class extends Component {
     super();
     this.state = { items: [] };
 
-    fetch('/api/perks').then(resp => {
+    fetch('/api/items').then(resp => {
       return ndjsonStream(resp.body);
     }).then(stream => {
       let reader = stream.getReader();
