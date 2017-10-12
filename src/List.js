@@ -23,6 +23,10 @@ export default class extends Component {
     });
   }
 
+  componentDidCatch(error, info) {
+    console.error(error, info);
+  }
+
   render() {
     let { items } = this.state;
 

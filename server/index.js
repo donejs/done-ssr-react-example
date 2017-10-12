@@ -14,7 +14,7 @@ const fs = require('fs');
 const app = express();
 
 const requests = require("done-ssr/zones/requests");
-const dom = require("done-ssr/zones/can-simple-dom");
+const dom = require("can-zone-jsdom");
 const pushFetch = require("done-ssr/zones/push-fetch");
 const pushMutations = require("done-ssr/zones/push-mutations");
 
