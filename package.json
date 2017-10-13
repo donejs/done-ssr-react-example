@@ -5,7 +5,7 @@
   "dependencies": {
     "can-ndjson-stream": "^0.1.6",
     "can-zone": "^0.6.12",
-    "can-zone-jsdom": "^1.1.0",
+    "can-zone-jsdom": "^1.2.1",
     "done-ssr": "^1.2.0-beta.1",
     "donejs-spdy": "^3.4.7",
     "express": "^4.16.1",

@@ -18,23 +18,9 @@ const dom = require("can-zone-jsdom");
 const pushFetch = require("done-ssr/zones/push-fetch");
 const pushMutations = require("done-ssr/zones/push-mutations");
 
-function render() {
-  const styles = document.createElement("link");
-  styles.setAttribute("rel", "stylesheet");
-  styles.setAttribute("href", "/static/css/main.c17080f1.css");
-  document.head.appendChild(styles);
-  document.body.innerHTML = `
-    <div id="one"></div>
-    <div id="root"></div>
-    <script src="/static/js/main.cc351d6c.js"></script>
-  `;
-
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
-}
-
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('build'));
+app.use(express.static('build', { index: false }));
 app.use(express.static('.'));
 
 require('./api')(app);
@@ -45,14 +31,17 @@ app.get('/', async (request, response) => {
 		requests(request),
 
 		// Sets up a DOM
-		dom(request),
+		dom(request, {
+      root: __dirname + "/../build",
+      html: "index.html"
+    }),
 
     // PUSH!
 		pushFetch(response),
     pushMutations(response)
 	]);
 
-  const runPromise = zone.run(render);
+  const runPromise = zone.run();
 
   // Send the initial HTML
   response.write(zone.data.html);
