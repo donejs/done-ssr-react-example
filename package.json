@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "can-ndjson-stream": "^0.1.6",
-    "can-zone": "^0.6.12",
-    "can-zone-jsdom": "^1.1.0",
-    "done-ssr": "^1.2.0-beta.1",
+    "can-ndjson-stream": "^1.0.1",
+    "can-zone": "^1.0.0",
+    "can-zone-jsdom": "^2.1.0",
+    "done-ssr": "^3.2.11",
     "donejs-spdy": "^3.4.7",
     "express": "^4.16.1",
     "ignore-styles": "^5.0.1",
@@ -14,7 +14,7 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "react-scripts": "1.0.14"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "server": "NODE_ENV=development KEY=~/.localhost-ssl/server.key CERT=~/.localhost-ssl/server.cert node server/index.js",
